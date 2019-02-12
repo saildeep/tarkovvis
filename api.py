@@ -37,7 +37,7 @@ def cached(file,fn):
     p = os.path.join(cache_dir(),file)
     assert_cache_folder_exists()
     if os.path.isfile(p):
-        return deserialize(file)
+        return deserialize(p)
 
     data = fn()
     serialize(p,data)
