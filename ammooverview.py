@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import pandas as pd
 import math
+from collections import OrderedDict
 ammoinfo = api.cached('ammo.json',api.get_ammo_info)
 ammoinfo = pd.DataFrame(ammoinfo)
 print(ammoinfo)
@@ -26,10 +27,12 @@ for categoryID in range(len(categories)):
     print(subset)
     for trader in alltraders:
         traderSubset = subset[subset[trader] == True]
-        x = traderSubset[xattr]
-        y = traderSubset[yattr]
+        
         if(traderSubset.size>0):
-            diagram.scatter(x,y,label=trader)
+            for i,row in traderSubset.iterrows():
+                x = row[xattr]
+                y = row[yattr]
+                diagram.scatter(x,y,label=trader)
         traderCount +=1
 
     for i, row in subset.iterrows():
@@ -50,7 +53,12 @@ for categoryID in range(len(categories)):
 
     plt.xlabel(xattr)
     plt.ylabel(yattr)
-    diagram.legend()
+
+
+    handles, labels = plt.gca().get_legend_handles_labels()
+    by_label = OrderedDict(zip(labels, handles))
+    plt.legend(by_label.values(), by_label.keys())
+
     plt.show(block=False)
     
     
