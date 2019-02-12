@@ -25,12 +25,22 @@ def deserialize(filename):
     with open(filename,'r') as f:
         return json.load(f)
 
+def cache_dir():
+    return os.path.join('.','__cache__')
+
+def assert_cache_folder_exists():
+    if os.path.isdir(cache_dir()):
+        return
+    os.mkdir(cache_dir())
+
 def cached(file,fn):
-    if os.path.isfile(file):
+    p = os.path.join(cache_dir(),file)
+    assert_cache_folder_exists()
+    if os.path.isfile(p):
         return deserialize(file)
 
     data = fn()
-    serialize(file,data)
+    serialize(p,data)
     return data
 
 def get_ammo_info():

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import pandas as pd
 import math
-ammoinfo = api.cached('./ammo.json',api.get_ammo_info)
+ammoinfo = api.cached('ammo.json',api.get_ammo_info)
 ammoinfo = pd.DataFrame(ammoinfo)
 print(ammoinfo)
 alltraders = list(filter(lambda x:x.startswith('Trader:'),list(ammoinfo.columns)))
