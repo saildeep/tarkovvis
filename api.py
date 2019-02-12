@@ -49,7 +49,7 @@ def get_ammo_info():
     dataname_regex = re.compile('\|[a-z]+\s*=')
     data_regex = re.compile('=(.*)$')
     velocity_regex = re.compile('[0-9]+\s')
-    weight_regex = re.compile('[0-9]+\s')
+    weight_regex = re.compile('[0-9]+\.[0-9]+\s')
 
     ammos = []
     for maybeAmmo in ammopage:
