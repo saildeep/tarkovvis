@@ -30,17 +30,18 @@ for categoryID in range(len(categories)):
         
         if(traderSubset.size>0):
             for i,row in traderSubset.iterrows():
+                t = row['name']
                 x = row[xattr]
                 y = row[yattr]
+                is_subsonic = pd.to_numeric(row['velocity'],errors='coerce')
                 diagram.scatter(x,y,label=trader)
+
+                xx = row[xattr]
+                yy = row[yattr]
+                diagram.annotate(t,(xx,yy),size=8,ha='left',va='bottom',rotation=30)
+
         traderCount +=1
 
-    for i, row in subset.iterrows():
-        t = row['name']
-        xx = row[xattr]
-        yy = row[yattr]
-        diagram.annotate(t,(xx,yy),size=8,ha='left',va='bottom',rotation=30)
-    
     xmin = subset[xattr].min()
     xmax = subset[xattr].max()
 
@@ -57,7 +58,7 @@ for categoryID in range(len(categories)):
 
     handles, labels = plt.gca().get_legend_handles_labels()
     by_label = OrderedDict(zip(labels, handles))
-    plt.legend(by_label.values(), by_label.keys())
+   
 
     plt.show(block=False)
     

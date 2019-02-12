@@ -48,6 +48,8 @@ def get_ammo_info():
     infobox_regex = re.compile("\{\{Infobox ammo(.*)\}\}",re.DOTALL)
     dataname_regex = re.compile('\|[a-z]+\s*=')
     data_regex = re.compile('=(.*)$')
+    velocity_regex = re.compile('[0-9]+\s')
+    weight_regex = re.compile('[0-9]+\s')
 
     ammos = []
     for maybeAmmo in ammopage:
@@ -69,8 +71,16 @@ def get_ammo_info():
                     data = datas[0].replace('=','').strip()
                     
                     valueDict[datatypeName]= data
+            #data cleaning goes here
             valueDict['category'] = categoryNames[0]
             valueDict['name']=maybeAmmoName
+            valueDict['velocity'] = float(velocity_regex.search(valueDict['velocity'])[0])
+            
+            weight_match = weight_regex.search(valueDict['weight'])
+            if weight_match:
+                valueDict['weight'] = float(weight_match[0])
+            else:
+                valueDict['weight'] = float(0)
             ammos.append(valueDict)
     traderslevels = set()
     for ammo in ammos:
