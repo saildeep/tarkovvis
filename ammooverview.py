@@ -12,6 +12,13 @@ print(alltraders)
 categories = list(set(ammoinfo["category"]))
 sqrtcats = math.ceil(math.sqrt(len(categories)))
 
+
+russian_ar =plt.figure(0)
+fig_lookup = {
+    ".366_TKM_ammunition":russian_ar,
+    "5.45x39mm_ammunition":russian_ar
+
+}
 colmap = cm.get_cmap('Accent')
 for categoryID in range(len(categories)):
     category = categories[categoryID]
