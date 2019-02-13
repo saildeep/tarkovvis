@@ -21,7 +21,7 @@ for categoryID in range(len(categories)):
     diagram.set_title(category)
     xattr='penetration'
     yattr='damage'
-
+    zattr='armor damage'
     subset[xattr] = pd.to_numeric(subset[xattr])
     subset[yattr] = pd.to_numeric(subset[yattr])
 
@@ -35,9 +35,10 @@ for categoryID in range(len(categories)):
                 t = row['name']
                 x = row[xattr]
                 y = row[yattr]
+                s = row[zattr]
                 is_subsonic ='v' if row['velocity'] < 343 else '.'
            
-                diagram.scatter(x,y,label=categoryID,color=colmap(categoryID),marker=is_subsonic)
+                diagram.scatter(x,y,s=[s*4],label=categoryID,color=colmap(categoryID),marker=is_subsonic)
 
                 xx = row[xattr]
                 yy = row[yattr]

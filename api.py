@@ -46,7 +46,7 @@ def cached(file,fn):
 def get_ammo_info():
     ammopage = get_page("Ammunition",'links').json()['parse']['links']
     infobox_regex = re.compile("\{\{Infobox ammo(.*)\}\}",re.DOTALL)
-    dataname_regex = re.compile('\|[a-z]+\s*=')
+    dataname_regex = re.compile('\|[a-z\s]+\s*=')
     data_regex = re.compile('=(.*)$')
     velocity_regex = re.compile('[0-9]+\s')
     weight_regex = re.compile('[0-9]+\.[0-9]+\s')
@@ -75,7 +75,8 @@ def get_ammo_info():
             valueDict['category'] = categoryNames[0]
             valueDict['name']=maybeAmmoName
             valueDict['velocity'] = float(velocity_regex.search(valueDict['velocity'])[0])
-            
+            valueDict['armor damage'] = float(valueDict['armor damage'])
+
             weight_match = weight_regex.search(valueDict['weight'])
             if weight_match:
                 valueDict['weight'] = float(weight_match[0])
