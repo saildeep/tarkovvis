@@ -36,7 +36,7 @@ for categoryID in range(len(categories)):
                 x = row[xattr]
                 y = row[yattr]
                 is_subsonic ='v' if row['velocity'] < 343 else '.'
-                print(colmap)
+           
                 diagram.scatter(x,y,label=categoryID,color=colmap(categoryID),marker=is_subsonic)
 
                 xx = row[xattr]
