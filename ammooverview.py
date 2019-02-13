@@ -48,9 +48,13 @@ for categoryID in range(len(categories)):
     ymin = subset[yattr].min()
     ymax = subset[yattr].max()
 
+
+    scaleX = .2 * (xmax - xmin)
+    scaleY = .2 * (ymax - ymin)
+
     axes = plt.gca()
-    axes.set_xlim([xmin,xmax])
-    axes.set_ylim([ymin,ymax])
+    axes.set_xlim([xmin-scaleX,xmax+scaleX])
+    axes.set_ylim([ymin-scaleY,ymax+scaleY])
 
     plt.xlabel(xattr)
     plt.ylabel(yattr)
