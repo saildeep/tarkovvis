@@ -11,6 +11,8 @@ alltraders = list(filter(lambda x:x.startswith('Trader:'),list(ammoinfo.columns)
 print(alltraders)
 categories = list(set(ammoinfo["category"]))
 sqrtcats = math.ceil(math.sqrt(len(categories)))
+
+colmap = cm.get_cmap('Accent')
 for categoryID in range(len(categories)):
     category = categories[categoryID]
     fig = plt.figure()
@@ -34,8 +36,8 @@ for categoryID in range(len(categories)):
                 x = row[xattr]
                 y = row[yattr]
                 is_subsonic ='v' if row['velocity'] < 343 else '.'
-                print(is_subsonic)
-                diagram.scatter(x,y,label=trader,marker=is_subsonic)
+                print(colmap)
+                diagram.scatter(x,y,label=categoryID,color=colmap(categoryID),marker=is_subsonic)
 
                 xx = row[xattr]
                 yy = row[yattr]
