@@ -17,7 +17,7 @@ def get_page(page,prop,additionalPayload = {}):
     return get_api(payload)
 
 def serialize(filename,data):
-    data = json.dumps(data)
+    data = json.dumps(data,sort_keys=True,indent=4)
     with open(filename,'w') as f:
         f.write(data)
 
