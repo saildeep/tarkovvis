@@ -57,8 +57,8 @@ for categoryID in range(len(categories)):
     scaleY = .2 * (ymax - ymin)
 
     axes = plt.gca()
-    axes.set_xlim([xmin-scaleX,xmax+scaleX])
-    axes.set_ylim([ymin-scaleY,ymax+scaleY])
+    #axes.set_xlim([xmin-scaleX,xmax+scaleX])
+    #axes.set_ylim([ymin-scaleY,ymax+scaleY])
 
     plt.xlabel(xattr)
     plt.ylabel(yattr)
