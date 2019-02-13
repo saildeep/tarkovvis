@@ -33,8 +33,9 @@ for categoryID in range(len(categories)):
                 t = row['name']
                 x = row[xattr]
                 y = row[yattr]
-                is_subsonic = pd.to_numeric(row['velocity'],errors='coerce')
-                diagram.scatter(x,y,label=trader)
+                is_subsonic ='v' if row['velocity'] < 343 else '.'
+                print(is_subsonic)
+                diagram.scatter(x,y,label=trader,marker=is_subsonic)
 
                 xx = row[xattr]
                 yy = row[yattr]
