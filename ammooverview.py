@@ -14,16 +14,37 @@ sqrtcats = math.ceil(math.sqrt(len(categories)))
 
 
 russian_ar =plt.figure(0)
+us_ar = plt.figure(0)
+other = plt.figure(0)
+pumpgun = plt.figure(0)
+sniper = plt.figure(0)
+russian_pistol_smg = plt.figure(0)
+us_pistol_smg = plt.figure(0)
 fig_lookup = {
     ".366_TKM_ammunition":russian_ar,
-    "5.45x39mm_ammunition":russian_ar
+    "5.45x39mm_ammunition":russian_ar,
+    "7.62x39mm_ammunition":russian_ar,
+    "9x39mm_ammunition":other,
+    "7.62x51mm_NATO_ammunition":us_ar,
+    "5.56x45mm_NATO_ammunition":us_ar,
+    "20x70mm_ammunition":pumpgun,
+    "12x70mm_ammunition":pumpgun,
+    "4.6x30mm_HK_ammunition":us_pistol_smg,
+    "9x19mm_Parabellum_ammunition":us_pistol_smg,
+    "7.62x54mmR_ammunition":sniper,
+    "9x18mm_Makarov_ammunition":russian_pistol_smg,
+    "9x21mm_Gyurza_ammunition":russian_pistol_smg,
+    "7.62x25mm_Tokarev_ammunition":russian_pistol_smg
+
 
 }
 colmap = cm.get_cmap('Accent')
 for categoryID in range(len(categories)):
     category = categories[categoryID]
-    fig = plt.figure()
-    diagram = plt.subplot(1,1,1)
+    fig = fig_lookup[category]
+    if fig is None:
+        raise Exception()
+    diagram = fig.gca()
     subset = ammoinfo[ammoinfo.category == category]
     diagram.set_title(category)
     xattr='penetration'
@@ -63,19 +84,19 @@ for categoryID in range(len(categories)):
     scaleX = .2 * (xmax - xmin)
     scaleY = .2 * (ymax - ymin)
 
-    axes = plt.gca()
+    axes = fig.gca()
     #axes.set_xlim([xmin-scaleX,xmax+scaleX])
     #axes.set_ylim([ymin-scaleY,ymax+scaleY])
 
-    plt.xlabel(xattr)
-    plt.ylabel(yattr)
+    axes.xlabel(xattr)
+    axes.ylabel(yattr)
 
 
-    handles, labels = plt.gca().get_legend_handles_labels()
+    handles, labels = fig.gca().get_legend_handles_labels()
     by_label = OrderedDict(zip(labels, handles))
    
 
-    plt.show(block=False)
+    fig.show(block=False)
     
     
     
